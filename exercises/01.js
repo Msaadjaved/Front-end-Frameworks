@@ -10,6 +10,6 @@ let rating = 8.8;
 // Later in the code:
 isWatched = true;
 rating = 8.8 + 0.2;
-movieTitle = "Interstellar"; // should this be allowed?
+movieTitle = "Interstellar"; // allowed, because movieTitle is declared with let
 
 console.log(movieTitle, releaseYear, isWatched, rating);
