@@ -1,5 +1,5 @@
-import { useState } from "react";
 import type { Movie } from "../types";
+import { useAppContext } from "../context/AppContext";
 
 interface MovieCardProps {
   movie: Movie;
@@ -9,7 +9,8 @@ const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 const PLACEHOLDER_IMAGE = "https://placehold.co/500x750?text=No+Image";
 
 function MovieCard({ movie }: MovieCardProps) {
-  const [isFavourite, setIsFavourite] = useState(false);
+  const { toggleFavorite, isFavorite } = useAppContext();
+  const favourite = isFavorite(movie.id);
 
   const releaseYear = movie.release_date
     ? movie.release_date.slice(0, 4)
@@ -39,16 +40,16 @@ function MovieCard({ movie }: MovieCardProps) {
             <button
               className="favorite-btn"
               aria-label={
-                isFavourite ? "Remove from favourites" : "Add to favourites"
+                favourite ? "Remove from favourites" : "Add to favourites"
               }
-              title={isFavourite ? "Remove from Watchlist" : "Add to Watchlist"}
-              onClick={() => setIsFavourite((prev) => !prev)}
+              title={favourite ? "Remove from Watchlist" : "Add to Watchlist"}
+              onClick={() => toggleFavorite(movie)}
             >
               <svg
                 width="16"
                 height="16"
                 viewBox="0 0 24 24"
-                fill={isFavourite ? "currentColor" : "none"}
+                fill={favourite ? "currentColor" : "none"}
                 stroke="currentColor"
                 strokeWidth={2}
               >

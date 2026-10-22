@@ -1,9 +1,13 @@
+import { useAppContext } from "../context/AppContext";
+
 interface SearchBarProps {
   query: string;
   onChange: (value: string) => void;
 }
 
 function SearchBar({ query, onChange }: SearchBarProps) {
+  const { theme, toggleTheme } = useAppContext();
+
   return (
     <div className="search-bar">
       <input
@@ -17,8 +21,12 @@ function SearchBar({ query, onChange }: SearchBarProps) {
         <button className="favorites-btn" title="Show Favorites">
           ♥
         </button>
-        <button className="theme-toggle-btn" title="Toggle Theme">
-          ☀
+        <button
+          className="theme-toggle-btn"
+          title="Toggle Theme"
+          onClick={toggleTheme}
+        >
+          {theme === "dark" ? "☀" : "🌙"}
         </button>
       </div>
     </div>
