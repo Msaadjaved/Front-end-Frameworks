@@ -1,5 +1,6 @@
 import type { Movie } from "../types";
 import { useAppContext } from "../context/AppContext";
+import { genreName } from "../utils/genres";
 
 interface MovieCardProps {
   movie: Movie;
@@ -38,7 +39,7 @@ function MovieCard({ movie }: MovieCardProps) {
               {movie.vote_average.toFixed(1)}
             </span>
             <button
-              className="favorite-btn"
+              className={`favorite-btn${favourite ? " is-favorite" : ""}`}
               aria-label={
                 favourite ? "Remove from favourites" : "Add to favourites"
               }
@@ -69,7 +70,7 @@ function MovieCard({ movie }: MovieCardProps) {
         <div className="movie-genres-tags">
           {movie.genre_ids.slice(0, 2).map((id) => (
             <span key={id} className="genre-tag">
-              {id}
+              {genreName(id)}
             </span>
           ))}
         </div>

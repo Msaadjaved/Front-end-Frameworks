@@ -7,11 +7,16 @@ interface MovieListProps {
 
 function MovieList({ movies }: MovieListProps) {
   if (movies.length === 0) {
-    return <p className="no-movies-message">No movies found.</p>;
+    return (
+      <div className="empty-state">
+        <p className="empty-title">No movies found.</p>
+        <p className="empty-text">Try a different search.</p>
+      </div>
+    );
   }
 
   return (
-    <div className="movie-grid">
+    <div className="movies-grid">
       {movies.map((movie) => (
         <MovieCard key={movie.id} movie={movie} />
       ))}

@@ -1,15 +1,21 @@
-import { useAppContext } from "../context/AppContext";
-
 interface SearchBarProps {
   query: string;
   onChange: (value: string) => void;
 }
 
 function SearchBar({ query, onChange }: SearchBarProps) {
-  const { theme, toggleTheme } = useAppContext();
-
   return (
-    <div className="search-bar">
+    <div className="search-input-wrapper">
+      <svg
+        className="search-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+      >
+        <circle cx="11" cy="11" r="8" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
       <input
         type="text"
         className="search-input"
@@ -17,18 +23,13 @@ function SearchBar({ query, onChange }: SearchBarProps) {
         value={query}
         onChange={(e) => onChange(e.target.value)}
       />
-      <div className="search-bar-actions">
-        <button className="favorites-btn" title="Show Favorites">
-          ♥
-        </button>
-        <button
-          className="theme-toggle-btn"
-          title="Toggle Theme"
-          onClick={toggleTheme}
-        >
-          {theme === "dark" ? "☀" : "🌙"}
-        </button>
-      </div>
+      <button
+        className="search-clear-btn"
+        aria-label="Clear search"
+        onClick={() => onChange("")}
+      >
+        ✕
+      </button>
     </div>
   );
 }
